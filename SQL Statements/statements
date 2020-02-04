@@ -1,0 +1,45 @@
+create schema zach;
+
+create table Genre
+(
+	Genre varchar(50)
+		constraint Genre_pk
+			primary key
+);
+
+create table Developer
+(
+	Studio varchar(50)
+		constraint Developer_pk
+			primary key
+);
+
+create table Game
+(
+	GameId int
+		constraint Game_pk
+			primary key,
+	Title varchar(255) not null,
+	Genre varchar(50)
+		constraint Game_GENRE_GENRE_fk
+			references GENRE,
+	ReleaseDate date,
+	Description varchar(1000),
+	Developer varchar(50)
+		constraint Game_DEVELOPER_STUDIO_fk
+			references DEVELOPER
+);
+
+create table Achievement
+(
+	AchievementId int
+		constraint Achievement_pk
+			primary key,
+	Name varchar(255) not null,
+	Gamerscore int not null,
+	Description varchar(1000),
+	Secret boolean not null,
+	GameId int
+		constraint Achievement_Game_GameId_fk
+			references Game (GameId)
+);
